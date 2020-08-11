@@ -1,0 +1,3 @@
+include ':utilCode'
+include ':app'
+rootProject.name = "KotlinUtilCode"
