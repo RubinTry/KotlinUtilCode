@@ -27,6 +27,10 @@ class BatteryIgnoreUtils {
         }
 
 
+        /**
+         * 请求将当前应用加入系统白名单
+         *
+         */
         @RequiresApi(Build.VERSION_CODES.M)
         fun requestIgnoreBatteryOptimizations(){
             val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
