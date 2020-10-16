@@ -4,10 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Base64
 import androidx.core.content.edit
-import cn.rubintry.common.utils.Utils
+import cn.rubintry.utilcode.Utils
 import java.io.*
 import java.lang.Exception
-import kotlin.jvm.internal.Ref
 
 /**
  * @author logcat

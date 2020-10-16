@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.PowerManager
 import android.provider.Settings
 import androidx.annotation.RequiresApi
-import cn.rubintry.common.utils.Utils
 
 class BatteryIgnoreUtils {
 

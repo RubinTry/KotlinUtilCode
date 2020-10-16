@@ -1,4 +1,4 @@
-package cn.rubintry.common.utils
+package cn.rubintry.utilcode
 
 import android.app.Application
 import android.content.Context
