@@ -43,10 +43,29 @@ class BitmapUtil {
         return bmp
     }
 
+
+    /**
+     * 默认已50%的质量压缩并保存到本地
+     *
+     * @param bitmap  图片源
+     * @param fileName  保存后的文件名称
+     * @param filePath  保存的文件路径
+     * @return
+     */
     fun bitmap2File(bitmap: Bitmap? , fileName : String , filePath: String): File {
         return bitmap2File(bitmap!!, 50 , fileName , filePath)!!
     }
 
+
+    /**
+     * 指定压缩质量后压缩并保存到本地
+     *
+     * @param bitmap  图片源
+     * @param quality  质量百分比
+     * @param fileName  保存后的文件名称
+     * @param filePath  保存的文件路径
+     * @return
+     */
     fun bitmap2File(bitmap: Bitmap, quality: Int, fileName: String?, filePath: String?): File? {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos)
@@ -99,17 +118,34 @@ class BitmapUtil {
         return degree
     }
 
+
+    /**
+     * 旋转图片
+     *
+     * @param angle  旋转角度
+     * @param bitmap  图片源
+     * @return
+     */
     fun rotate(angle: Int, bitmap: Bitmap): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(angle.toFloat())
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
+
+    /**
+     * 得到一张不会被系统自动旋转的照片
+     *
+     * @param path  照片路径
+     * @return
+     */
     fun getRealPhoto(path: String?): Bitmap {
         val degree = readPictureDegree(path)
         val bitmap = BitmapFactory.decodeFile(path)
         return rotate(degree, bitmap)
     }
+
+
 
     fun getRealPhotoFile(imageFile: File, quality: Int): File {
         val bitmap = getRealPhoto(imageFile.absolutePath)
