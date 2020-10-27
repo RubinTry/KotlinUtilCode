@@ -52,8 +52,8 @@ class BitmapUtil {
      * @param filePath  保存的文件路径
      * @return
      */
-    fun bitmap2File(bitmap: Bitmap? , fileName : String , filePath: String): File {
-        return bitmap2File(bitmap!!, 50 , fileName , filePath)!!
+    fun bitmap2File(bitmap: Bitmap? , fileName : String , filePath: String , compressCallback: CompressCallback){
+        bitmap2File(bitmap!!, 50 , fileName , filePath , compressCallback)
     }
 
 
@@ -66,7 +66,7 @@ class BitmapUtil {
      * @param filePath  保存的文件路径
      * @return
      */
-    fun bitmap2File(bitmap: Bitmap, quality: Int, fileName: String?, filePath: String?): File? {
+    fun bitmap2File(bitmap: Bitmap, quality: Int, fileName: String?, filePath: String? , compressCallback: CompressCallback) {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos)
         val storageDir = File(filePath)
@@ -78,6 +78,7 @@ class BitmapUtil {
             imageFile = File.createTempFile(fileName, ".png", storageDir)
         } catch (e: IOException) {
             e.printStackTrace()
+            compressCallback.compressFail(e)
         }
         try {
             val fos = FileOutputStream(imageFile)
@@ -90,8 +91,9 @@ class BitmapUtil {
             fos.close()
         } catch (e: Exception) {
             e.printStackTrace()
+            compressCallback.compressFail(e)
         }
-        return imageFile
+        compressCallback.complete(imageFile!!)
     }
 
     /**
@@ -181,5 +183,12 @@ class BitmapUtil {
                 return field
             }
             private set
+    }
+
+
+    interface CompressCallback{
+        fun complete(file : File)
+
+        fun compressFail(throwable: Throwable)
     }
 }
